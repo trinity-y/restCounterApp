@@ -1,0 +1,10 @@
+C:\Users\trin\source\repos\restCounterApp\restCounterApp\bin\Debug\restCounterApp.exe.config
+C:\Users\trin\source\repos\restCounterApp\restCounterApp\bin\Debug\restCounterApp.exe
+C:\Users\trin\source\repos\restCounterApp\restCounterApp\bin\Debug\restCounterApp.pdb
+C:\Users\trin\source\repos\restCounterApp\restCounterApp\obj\Debug\restCounterApp.csprojAssemblyReference.cache
+C:\Users\trin\source\repos\restCounterApp\restCounterApp\obj\Debug\restCounterApp.Form1.resources
+C:\Users\trin\source\repos\restCounterApp\restCounterApp\obj\Debug\restCounterApp.Properties.Resources.resources
+C:\Users\trin\source\repos\restCounterApp\restCounterApp\obj\Debug\restCounterApp.csproj.GenerateResource.cache
+C:\Users\trin\source\repos\restCounterApp\restCounterApp\obj\Debug\restCounterApp.csproj.CoreCompileInputs.cache
+C:\Users\trin\source\repos\restCounterApp\restCounterApp\obj\Debug\restCounterApp.exe
+C:\Users\trin\source\repos\restCounterApp\restCounterApp\obj\Debug\restCounterApp.pdb
