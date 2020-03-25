@@ -4,6 +4,7 @@ using System.ComponentModel;
 using System.Data;
 using System.Drawing;
 using System.Linq;
+using System.Xml.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
@@ -37,6 +38,7 @@ namespace restCounterApp
         private void btnSavedScore_Click(object sender, EventArgs e)
         {
             pnlMainMenu.Hide();
+
         }
 
         private void mtxtBpm_MaskInputRejected(object sender, MaskInputRejectedEventArgs e)
@@ -156,6 +158,49 @@ namespace restCounterApp
                     }
                 }
             }
+        }
+
+        private void btnSaveScore_Click(object sender, EventArgs e)
+        {
+            /*CREATING AN XML DOCUMENT WITH THE THREE PARALLEL ARRAYS & LENGTH OF QUEUE*/
+            //creates an empty sort of 'frame' for the data
+            String xmlBase =
+                @"<?xml version=""1.0""?> 
+                <root>
+                    <queueInSeconds>
+                    </queueInSeconds>
+                    <queueVisible>
+                    </queueVisible>
+                    <queueType>
+                    </queueType>
+                </root>";
+            //parses the string frame into an xml file
+            XDocument savedPiece = XDocument.Parse(xmlBase);
+
+            //each foreach loop fills in the node with data from an array
+            foreach (Decimal element in queueInSeconds)
+            {
+                savedPiece.Element("root").Element("queueInSeconds").Add(new XElement("queue", element));
+            }
+            foreach (string element in queueVisible)
+            {
+                savedPiece.Element("root").Element("queueVisible").Add(new XElement("queue", element));
+            }
+            foreach (string element in queueType)
+            {
+                savedPiece.Element("root").Element("queueType").Add(new XElement("queue", element));
+            }
+            //saves it to computer with name
+            string path = System.IO.Path.GetDirectoryName(Application.ExecutablePath) + "\\" + mtxtFileName.Text + ".xml";
+            savedPiece.Save(path);
+        }
+
+        private void Form1_Load(object sender, EventArgs e)
+        {
+            pnlMainMenu.Show();
+            pnlOpenScore.Hide();
+            pnlRunScore.Hide();
+            pnlInputNewScore.Hide();
         }
     }
 }
