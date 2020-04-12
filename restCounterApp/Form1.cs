@@ -1,4 +1,5 @@
 ﻿using System;
+using System.IO;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -20,6 +21,7 @@ namespace restCounterApp
         bool pieceStarted = false;
         Timer musicTimer = new Timer();
         int queueIndex = 0;
+        string loadedPiecePath;
         public Form1()
         {
             InitializeComponent();
@@ -38,6 +40,28 @@ namespace restCounterApp
         private void btnSavedScore_Click(object sender, EventArgs e)
         {
             pnlMainMenu.Hide();
+            pnlOpenScore.Show();
+            OpenFileDialog openFileDialog1 = new OpenFileDialog
+            {
+                InitialDirectory = System.IO.Path.GetDirectoryName(Application.ExecutablePath) + "\\userPieces",
+                Title = "Browse pieces...",
+
+                CheckFileExists = true,
+                CheckPathExists = true,
+
+                DefaultExt = "xml",
+                Filter = "xml files (*.xml)|*.xml",
+                FilterIndex = 2,
+                RestoreDirectory = true,
+
+                ReadOnlyChecked = true,
+                ShowReadOnly = true
+            };
+            if (openFileDialog1.ShowDialog() == DialogResult.OK)
+            {
+                loadedPiecePath = openFileDialog1.FileName;
+                Console.WriteLine("found file at path " + loadedPiecePath);
+            }
 
         }
 
@@ -190,9 +214,24 @@ namespace restCounterApp
             {
                 savedPiece.Element("root").Element("queueType").Add(new XElement("queue", element));
             }
+            //makes a pieces folder if not created already
+            string folderPath = System.IO.Path.GetDirectoryName(Application.ExecutablePath) + "\\userPieces";
+            try {
+                if (!Directory.Exists(folderPath))
+                {
+                    Directory.CreateDirectory(folderPath);
+                }
+            }
+            catch (Exception){
+                //if it doesnt work DON't worry about it
+            }
+
             //saves it to computer with name
-            string path = System.IO.Path.GetDirectoryName(Application.ExecutablePath) + "\\" + mtxtFileName.Text + ".xml";
+            string path = folderPath + "\\" + mtxtFileName.Text + ".xml";
             savedPiece.Save(path);
+            Console.WriteLine("xml file saved at: " + path);
+            lblPieceSavedConfirm.Visible = true;
+            labelShowTimer.Enabled = true;
         }
 
         private void Form1_Load(object sender, EventArgs e)
@@ -201,6 +240,12 @@ namespace restCounterApp
             pnlOpenScore.Hide();
             pnlRunScore.Hide();
             pnlInputNewScore.Hide();
+        }
+
+        private void labelShowTimer_Tick(object sender, EventArgs e)
+        {
+            lblPieceSavedConfirm.Visible = false;
+            labelShowTimer.Enabled = false;
         }
     }
 }

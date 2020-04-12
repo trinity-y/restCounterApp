@@ -28,12 +28,15 @@
         /// </summary>
         private void InitializeComponent()
         {
+            this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Form1));
             this.lblTitle = new System.Windows.Forms.Label();
             this.btnNewScore = new System.Windows.Forms.Button();
             this.btnSavedScore = new System.Windows.Forms.Button();
             this.pnlMainMenu = new System.Windows.Forms.Panel();
             this.pnlInputNewScore = new System.Windows.Forms.Panel();
+            this.mtxtFileName = new System.Windows.Forms.MaskedTextBox();
+            this.lblPieceNameEnter = new System.Windows.Forms.Label();
             this.btnSaveScore = new System.Windows.Forms.Button();
             this.cmbQueueType = new System.Windows.Forms.ComboBox();
             this.btnStart = new System.Windows.Forms.Button();
@@ -50,8 +53,9 @@
             this.lblTimeSignature = new System.Windows.Forms.Label();
             this.pnlRunScore = new System.Windows.Forms.Panel();
             this.pnlOpenScore = new System.Windows.Forms.Panel();
-            this.lblPieceNameEnter = new System.Windows.Forms.Label();
-            this.mtxtFileName = new System.Windows.Forms.MaskedTextBox();
+            this.openFileDialog1 = new System.Windows.Forms.OpenFileDialog();
+            this.lblPieceSavedConfirm = new System.Windows.Forms.Label();
+            this.labelShowTimer = new System.Windows.Forms.Timer(this.components);
             this.pnlMainMenu.SuspendLayout();
             this.pnlInputNewScore.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.nudNumerator)).BeginInit();
@@ -106,6 +110,7 @@
             // 
             // pnlInputNewScore
             // 
+            this.pnlInputNewScore.Controls.Add(this.lblPieceSavedConfirm);
             this.pnlInputNewScore.Controls.Add(this.mtxtFileName);
             this.pnlInputNewScore.Controls.Add(this.lblPieceNameEnter);
             this.pnlInputNewScore.Controls.Add(this.btnSaveScore);
@@ -127,6 +132,24 @@
             this.pnlInputNewScore.Size = new System.Drawing.Size(318, 326);
             this.pnlInputNewScore.TabIndex = 4;
             this.pnlInputNewScore.Visible = false;
+            // 
+            // mtxtFileName
+            // 
+            this.mtxtFileName.Location = new System.Drawing.Point(172, 289);
+            this.mtxtFileName.Mask = "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa";
+            this.mtxtFileName.Name = "mtxtFileName";
+            this.mtxtFileName.Size = new System.Drawing.Size(123, 20);
+            this.mtxtFileName.TabIndex = 19;
+            // 
+            // lblPieceNameEnter
+            // 
+            this.lblPieceNameEnter.AutoSize = true;
+            this.lblPieceNameEnter.Font = new System.Drawing.Font("Frank Ruhl Hofshi", 8.999999F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblPieceNameEnter.Location = new System.Drawing.Point(170, 270);
+            this.lblPieceNameEnter.Name = "lblPieceNameEnter";
+            this.lblPieceNameEnter.Size = new System.Drawing.Size(71, 15);
+            this.lblPieceNameEnter.TabIndex = 18;
+            this.lblPieceNameEnter.Text = "name of file:";
             // 
             // btnSaveScore
             // 
@@ -291,33 +314,36 @@
             this.pnlOpenScore.Size = new System.Drawing.Size(343, 351);
             this.pnlOpenScore.TabIndex = 0;
             // 
-            // lblPieceNameEnter
+            // openFileDialog1
             // 
-            this.lblPieceNameEnter.AutoSize = true;
-            this.lblPieceNameEnter.Font = new System.Drawing.Font("Frank Ruhl Hofshi", 8.999999F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblPieceNameEnter.Location = new System.Drawing.Point(170, 270);
-            this.lblPieceNameEnter.Name = "lblPieceNameEnter";
-            this.lblPieceNameEnter.Size = new System.Drawing.Size(71, 15);
-            this.lblPieceNameEnter.TabIndex = 18;
-            this.lblPieceNameEnter.Text = "name of file:";
+            this.openFileDialog1.FileName = "openFileDialog1";
             // 
-            // mtxtFileName
+            // lblPieceSavedConfirm
             // 
-            this.mtxtFileName.Location = new System.Drawing.Point(172, 289);
-            this.mtxtFileName.Mask = "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa";
-            this.mtxtFileName.Name = "mtxtFileName";
-            this.mtxtFileName.Size = new System.Drawing.Size(123, 20);
-            this.mtxtFileName.TabIndex = 19;
+            this.lblPieceSavedConfirm.BackColor = System.Drawing.SystemColors.ControlLightLight;
+            this.lblPieceSavedConfirm.Font = new System.Drawing.Font("Frank Ruhl Hofshi", 36F, ((System.Drawing.FontStyle)((System.Drawing.FontStyle.Bold | System.Drawing.FontStyle.Italic))), System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblPieceSavedConfirm.ForeColor = System.Drawing.Color.SeaGreen;
+            this.lblPieceSavedConfirm.Location = new System.Drawing.Point(79, 101);
+            this.lblPieceSavedConfirm.Name = "lblPieceSavedConfirm";
+            this.lblPieceSavedConfirm.Size = new System.Drawing.Size(164, 125);
+            this.lblPieceSavedConfirm.TabIndex = 20;
+            this.lblPieceSavedConfirm.Text = "piece saved!";
+            this.lblPieceSavedConfirm.Visible = false;
+            // 
+            // labelShowTimer
+            // 
+            this.labelShowTimer.Interval = 1000;
+            this.labelShowTimer.Tick += new System.EventHandler(this.labelShowTimer_Tick);
             // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(342, 350);
-            this.Controls.Add(this.pnlMainMenu);
+            this.Controls.Add(this.pnlInputNewScore);
             this.Controls.Add(this.pnlOpenScore);
             this.Controls.Add(this.pnlRunScore);
-            this.Controls.Add(this.pnlInputNewScore);
+            this.Controls.Add(this.pnlMainMenu);
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Name = "Form1";
             this.Text = "Rest Counter";
@@ -357,6 +383,9 @@
         private System.Windows.Forms.Button btnSaveScore;
         private System.Windows.Forms.Label lblPieceNameEnter;
         private System.Windows.Forms.MaskedTextBox mtxtFileName;
+        private System.Windows.Forms.OpenFileDialog openFileDialog1;
+        private System.Windows.Forms.Label lblPieceSavedConfirm;
+        private System.Windows.Forms.Timer labelShowTimer;
     }
 }
 
