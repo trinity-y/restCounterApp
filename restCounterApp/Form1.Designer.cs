@@ -35,6 +35,7 @@
             this.btnSavedScore = new System.Windows.Forms.Button();
             this.pnlMainMenu = new System.Windows.Forms.Panel();
             this.pnlInputNewScore = new System.Windows.Forms.Panel();
+            this.lblPieceSavedConfirm = new System.Windows.Forms.Label();
             this.mtxtFileName = new System.Windows.Forms.MaskedTextBox();
             this.lblPieceNameEnter = new System.Windows.Forms.Label();
             this.btnSaveScore = new System.Windows.Forms.Button();
@@ -54,11 +55,12 @@
             this.pnlRunScore = new System.Windows.Forms.Panel();
             this.pnlOpenScore = new System.Windows.Forms.Panel();
             this.openFileDialog1 = new System.Windows.Forms.OpenFileDialog();
-            this.lblPieceSavedConfirm = new System.Windows.Forms.Label();
             this.labelShowTimer = new System.Windows.Forms.Timer(this.components);
+            this.lblDiagnosticConfirm = new System.Windows.Forms.Label();
             this.pnlMainMenu.SuspendLayout();
             this.pnlInputNewScore.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.nudNumerator)).BeginInit();
+            this.pnlOpenScore.SuspendLayout();
             this.SuspendLayout();
             // 
             // lblTitle
@@ -132,6 +134,18 @@
             this.pnlInputNewScore.Size = new System.Drawing.Size(318, 326);
             this.pnlInputNewScore.TabIndex = 4;
             this.pnlInputNewScore.Visible = false;
+            // 
+            // lblPieceSavedConfirm
+            // 
+            this.lblPieceSavedConfirm.BackColor = System.Drawing.SystemColors.ControlLightLight;
+            this.lblPieceSavedConfirm.Font = new System.Drawing.Font("Frank Ruhl Hofshi", 36F, ((System.Drawing.FontStyle)((System.Drawing.FontStyle.Bold | System.Drawing.FontStyle.Italic))), System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblPieceSavedConfirm.ForeColor = System.Drawing.Color.SeaGreen;
+            this.lblPieceSavedConfirm.Location = new System.Drawing.Point(79, 101);
+            this.lblPieceSavedConfirm.Name = "lblPieceSavedConfirm";
+            this.lblPieceSavedConfirm.Size = new System.Drawing.Size(164, 125);
+            this.lblPieceSavedConfirm.TabIndex = 20;
+            this.lblPieceSavedConfirm.Text = "piece saved!";
+            this.lblPieceSavedConfirm.Visible = false;
             // 
             // mtxtFileName
             // 
@@ -309,6 +323,7 @@
             // pnlOpenScore
             // 
             this.pnlOpenScore.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
+            this.pnlOpenScore.Controls.Add(this.lblDiagnosticConfirm);
             this.pnlOpenScore.Location = new System.Drawing.Point(0, 0);
             this.pnlOpenScore.Name = "pnlOpenScore";
             this.pnlOpenScore.Size = new System.Drawing.Size(343, 351);
@@ -318,30 +333,30 @@
             // 
             this.openFileDialog1.FileName = "openFileDialog1";
             // 
-            // lblPieceSavedConfirm
-            // 
-            this.lblPieceSavedConfirm.BackColor = System.Drawing.SystemColors.ControlLightLight;
-            this.lblPieceSavedConfirm.Font = new System.Drawing.Font("Frank Ruhl Hofshi", 36F, ((System.Drawing.FontStyle)((System.Drawing.FontStyle.Bold | System.Drawing.FontStyle.Italic))), System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblPieceSavedConfirm.ForeColor = System.Drawing.Color.SeaGreen;
-            this.lblPieceSavedConfirm.Location = new System.Drawing.Point(79, 101);
-            this.lblPieceSavedConfirm.Name = "lblPieceSavedConfirm";
-            this.lblPieceSavedConfirm.Size = new System.Drawing.Size(164, 125);
-            this.lblPieceSavedConfirm.TabIndex = 20;
-            this.lblPieceSavedConfirm.Text = "piece saved!";
-            this.lblPieceSavedConfirm.Visible = false;
-            // 
             // labelShowTimer
             // 
             this.labelShowTimer.Interval = 1000;
             this.labelShowTimer.Tick += new System.EventHandler(this.labelShowTimer_Tick);
+            // 
+            // lblDiagnosticConfirm
+            // 
+            this.lblDiagnosticConfirm.AutoSize = true;
+            this.lblDiagnosticConfirm.Font = new System.Drawing.Font("Frank Ruhl Hofshi", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblDiagnosticConfirm.ForeColor = System.Drawing.SystemColors.Control;
+            this.lblDiagnosticConfirm.Location = new System.Drawing.Point(36, 156);
+            this.lblDiagnosticConfirm.Name = "lblDiagnosticConfirm";
+            this.lblDiagnosticConfirm.Size = new System.Drawing.Size(271, 25);
+            this.lblDiagnosticConfirm.TabIndex = 0;
+            this.lblDiagnosticConfirm.Text = "you can close the window now";
+            this.lblDiagnosticConfirm.Visible = false;
             // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(342, 350);
-            this.Controls.Add(this.pnlInputNewScore);
             this.Controls.Add(this.pnlOpenScore);
+            this.Controls.Add(this.pnlInputNewScore);
             this.Controls.Add(this.pnlRunScore);
             this.Controls.Add(this.pnlMainMenu);
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
@@ -354,6 +369,8 @@
             this.pnlInputNewScore.ResumeLayout(false);
             this.pnlInputNewScore.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.nudNumerator)).EndInit();
+            this.pnlOpenScore.ResumeLayout(false);
+            this.pnlOpenScore.PerformLayout();
             this.ResumeLayout(false);
 
         }
@@ -386,6 +403,7 @@
         private System.Windows.Forms.OpenFileDialog openFileDialog1;
         private System.Windows.Forms.Label lblPieceSavedConfirm;
         private System.Windows.Forms.Timer labelShowTimer;
+        private System.Windows.Forms.Label lblDiagnosticConfirm;
     }
 }
 

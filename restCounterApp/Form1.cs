@@ -30,6 +30,33 @@ namespace restCounterApp
             this.musicTimer.Tick += new EventHandler(this.musicTimerEnd);
         }
 
+        decimal[] LoadDecimalData(string listName,  XDocument savedPiece)
+        {
+            queueIndex = 0;
+            var currQ = savedPiece.Elements("root").Elements(listName).Elements("queue");
+            
+             decimal[] emptyList = new decimal[1000];
+             foreach (string element in currQ)
+             {
+                 emptyList[queueIndex] = Decimal.Parse(element);
+                 queueIndex++;
+             }
+            return emptyList;
+        }
+        string[] LoadStringData(string listName, XDocument savedPiece)
+        {
+            queueIndex = 0;
+            var currQ = savedPiece.Elements("root").Elements(listName).Elements("queue");
+
+            string[] emptyList = new string[1000];
+            foreach (string element in currQ)
+            {
+                emptyList[queueIndex] = element;
+                queueIndex++;
+            }
+            return emptyList;
+        }
+
         private void btnNewScore_Click(object sender, EventArgs e)
         {
             pnlMainMenu.Hide();
@@ -59,8 +86,15 @@ namespace restCounterApp
             };
             if (openFileDialog1.ShowDialog() == DialogResult.OK)
             {
+                // load user's piece
                 loadedPiecePath = openFileDialog1.FileName;
                 Console.WriteLine("found file at path " + loadedPiecePath);
+                var savedPiece = XDocument.Load(loadedPiecePath);
+                // LOADS INTO ARRAYS
+                queueInSeconds = LoadDecimalData("queueInSeconds", savedPiece);
+                queueType = LoadStringData("queueType", savedPiece);
+                queueVisible = LoadStringData("queueVisible", savedPiece);
+                //lblDiagnosticConfirm.Visible = true;
             }
 
         }
