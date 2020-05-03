@@ -18,6 +18,7 @@ namespace restCounterApp
         decimal[] queueInSeconds = new decimal[1000];
         string[] queueVisible = new string[1000];
         string[] queueType = new string[1000];
+        decimal[] queueOneBarInSeconds = new decimal[1000]; 
         bool pieceStarted = false;
         Timer musicTimer = new Timer();
         int queueIndex = 0;
@@ -106,8 +107,17 @@ namespace restCounterApp
 
         private void btnEnter_Click(object sender, EventArgs e)
         {
+            //goes back and adds a warning bar if necessary
+            if (cmbQueueType.Text == "music" && lengthOfQueue > 0 && queueType[lengthOfQueue-1] == "rest")
+            {
+                queueInSeconds[lengthOfQueue-1] -= queueOneBarInSeconds[lengthOfQueue-1];//subtracts a bar from the rest
+                queueInSeconds[lengthOfQueue] = queueOneBarInSeconds[lengthOfQueue - 1];//adds a warning bar
+                queueType[lengthOfQueue] = "warning";//with type warning
+                lengthOfQueue += 1;
+            }
             //calculates how long the queue will be in seconds and records that to an array
-            queueInSeconds[lengthOfQueue] = (1 / decimal.Parse(mtxtBpm.Text) * 60 * nudNumerator.Value)*decimal.Parse(txtEnterQueue.Text);
+            queueOneBarInSeconds[lengthOfQueue] = 1 / decimal.Parse(mtxtBpm.Text) * 60 * nudNumerator.Value;
+            queueInSeconds[lengthOfQueue] = queueOneBarInSeconds[lengthOfQueue] * decimal.Parse(txtEnterQueue.Text);
             //indicates if queue is music or rest
             queueType[lengthOfQueue] = cmbQueueType.Text;
             //what the user sees (describes x bars of type)
@@ -137,8 +147,6 @@ namespace restCounterApp
                 int millisecondsInt = (int)Math.Round(queueInSeconds[queueIndex] * 1000, 0, MidpointRounding.AwayFromZero);
                 //set the timer to this int
                 musicTimer.Interval = millisecondsInt;
-                
-
             } else
             {
                 Console.WriteLine("no more music, STOP!!");
@@ -158,6 +166,11 @@ namespace restCounterApp
                 Console.WriteLine("this next type is rest");
                 //sets colour to red
                 pnlRunScore.BackColor = Color.FromArgb(163, 23, 20);
+                musicTimer.Enabled = true;
+            } else if (queueType[queueIndex] == "warning")
+            {
+                Console.WriteLine("this next type is a warning");
+                pnlRunScore.BackColor = Color.FromArgb(223, 159, 40);
                 musicTimer.Enabled = true;
             }
             else
