@@ -12,9 +12,6 @@ when you're done adding your queues, you can save your file, or just start runni
   before saving, you'll want to name the file by entering your desired name on the right.
   it's highly reccomended that you save your piece so you don't lose it!
 
-## upcoming features (hopefully)
-- a yellow, one bar before state
-
 ## this project shows experience with
 - reading/writing xml files
 - windows forms apps
