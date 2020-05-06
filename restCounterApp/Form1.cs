@@ -95,7 +95,11 @@ namespace restCounterApp
                 queueInSeconds = LoadDecimalData("queueInSeconds", savedPiece);
                 queueType = LoadStringData("queueType", savedPiece);
                 queueVisible = LoadStringData("queueVisible", savedPiece);
-                //lblDiagnosticConfirm.Visible = true;
+                // load length of queue
+                lengthOfQueue = (int)savedPiece.Element("root").Element("lengthOfQueue");
+                Console.WriteLine(lengthOfQueue);
+                pnlOpenScore.Hide();
+                pnlRunScore.Show();
             }
 
         }
@@ -138,7 +142,7 @@ namespace restCounterApp
         }
         private void musicTimerEnd(Object sender, EventArgs e)//i removed static
         {
-            //Console.WriteLine("on queue " + queueIndex.ToString() + " out of " + lengthOfQueue.ToString());
+            Console.WriteLine("on queue " + queueIndex.ToString() + " out of " + lengthOfQueue.ToString());
             queueIndex += 1;
             if (queueIndex < lengthOfQueue)
             {
@@ -151,7 +155,8 @@ namespace restCounterApp
             {
                 Console.WriteLine("no more music, STOP!!");
                 musicTimer.Enabled = false;
-                pnlRunScore.BackColor = Color.FromArgb(223, 159, 40);
+                pnlRunScore.Hide();
+                pnlMainMenu.Show();
 
             }
             if (queueType[queueIndex] == "music")
@@ -209,6 +214,8 @@ namespace restCounterApp
                 //if timer hasn't started yet
                 else if (pieceStarted == false)
                 {
+                    //sets back index
+                    queueIndex = 0;
                     //sets timer to the length of the cue
                     decimal millisecondsDec = queueInSeconds[0] * 1000;
                     int millisecondsInt = (int)Math.Round(millisecondsDec, 0, MidpointRounding.AwayFromZero);
@@ -244,6 +251,8 @@ namespace restCounterApp
                     </queueVisible>
                     <queueType>
                     </queueType>
+                    <lengthOfQueue>
+                    </lengthOfQueue>
                 </root>";
             //parses the string frame into an xml file
             XDocument savedPiece = XDocument.Parse(xmlBase);
@@ -261,6 +270,7 @@ namespace restCounterApp
             {
                 savedPiece.Element("root").Element("queueType").Add(new XElement("queue", element));
             }
+            savedPiece.Element("root").Add(new XElement("lengthOfQueue", lengthOfQueue));
             //makes a pieces folder if not created already
             string folderPath = System.IO.Path.GetDirectoryName(Application.ExecutablePath) + "\\userPieces";
             try {
