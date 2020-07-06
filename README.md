@@ -5,7 +5,7 @@ counts rests for you!
 first, you'll have to input rests for a piece you have.
 input the 'numerator' of your time signature and the bpm.
 then, start inputting each queue. a queue consists of it's type - music or rest - and it's length in bars.
-  if it's a pickup bar, tempo change, etc., no worries - just change the relevant data in the esction above!
+  if it's a pickup bar, tempo change, etc., no worries - just change the relevant data in the section above!
   this data is recorded per queue, so it doesn't matter if you have a different bpm every queue!
 click 'add to queue' and you should see it pop up in the queue list to the right.
 when you're done adding your queues, you can save your file, or just start running the music!
