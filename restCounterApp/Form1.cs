@@ -96,6 +96,7 @@ namespace restCounterApp
                 queueType = LoadStringData("queueType", savedPiece);
                 queueVisible = LoadStringData("queueVisible", savedPiece);
                 // load length of queue
+                Console.WriteLine(savedPiece.Element("root").Element("lengthOfQueue"));
                 lengthOfQueue = (int)savedPiece.Element("root").Element("lengthOfQueue");
                 Console.WriteLine(lengthOfQueue);
                 pnlOpenScore.Hide();
@@ -251,8 +252,6 @@ namespace restCounterApp
                     </queueVisible>
                     <queueType>
                     </queueType>
-                    <lengthOfQueue>
-                    </lengthOfQueue>
                 </root>";
             //parses the string frame into an xml file
             XDocument savedPiece = XDocument.Parse(xmlBase);
